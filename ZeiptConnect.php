@@ -16,7 +16,7 @@ class ZeiptConnect
     public $routeCardRegisterFailed; //Route to redirect user to if card register fails
     public $routeCardRegisterCancelled; //Route to redirect user to if card register is cancelled
     public $routeCardRegisterSuccess; //Route to redirect user to if card register is successful
-    private static $baseUrl = "http://35.228.49.128:8888";
+    private static $baseUrl = "https://zeipt.nu:443/echo";
 
     public function __construct($token, $username, $password)
     {
