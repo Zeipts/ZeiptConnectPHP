@@ -78,7 +78,7 @@ class ZeiptConnect
     private function BaseHeader($existing = [])
     {
         $existing[] = 'Content-Type: application/json';
-        $existing[] = 'auth_token: VxmYUHk456';
+        $existing[] = 'auth_token: ' . $this->authToken;
         return $existing;
     }
 }
