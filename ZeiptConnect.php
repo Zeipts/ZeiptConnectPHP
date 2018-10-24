@@ -16,7 +16,7 @@ class ZeiptConnect
     public $routeCardRegisterFailed; //Route to redirect user to if card register fails
     public $routeCardRegisterCancelled; //Route to redirect user to if card register is cancelled
     public $routeCardRegisterSuccess; //Route to redirect user to if card register is successful
-    private static $baseUrl = "https://zeipt.nu:443/echo";
+    private static $baseUrl = "https://zeipt.nu:443";
 
     public function __construct($token, $username, $password)
     {
@@ -50,7 +50,7 @@ class ZeiptConnect
     public function GetCard($customerId, $transferNr)
     {
         $curl_post_data = array(
-            'provicer_gcid' => $customerId,
+            'provider_gcid' => $customerId,
             'zeipt_card_transnr' => $transferNr
         );
         return json_decode($this->doPost($curl_post_data, '/customer/card'));
