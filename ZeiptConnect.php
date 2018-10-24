@@ -34,9 +34,26 @@ class ZeiptConnect
         return strpos($response, 'DONE') !== FALSE;
     }
 
-    public function GetReceipts($customerId)
+    public function GetReceipts($customerId, $from, $to)
     {
-        //
+        $curl_post_data = array(
+            'provicer_gcid' => $customerId,
+            'all_data' => array(
+                'from_timestamp' => $from,
+                'to_timestamp' => $to,
+                'all_receipts' => false
+            )
+        );
+        return json_decode($this->doPost($curl_post_data, '/customer/receipt'));
+    }
+
+    public function GetCard($customerId, $transferNr)
+    {
+        $curl_post_data = array(
+            'provicer_gcid' => $customerId,
+            'zeipt_card_transnr' => $transferNr
+        );
+        return json_decode($this->doPost($curl_post_data, '/customer/card'));
     }
 
     public function CreateCardRegister($customerId, $successRoute, $failRoute, $cancelRoute)
