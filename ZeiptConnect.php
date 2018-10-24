@@ -41,7 +41,7 @@ class ZeiptConnect
             'all_data' => array(
                 'from_timestamp' => $from,
                 'to_timestamp' => $to,
-                'all_receipts' => false
+                'all_receipts' => true
             )
         );
         return json_decode($this->doPost($curl_post_data, '/customer/receipt'));
