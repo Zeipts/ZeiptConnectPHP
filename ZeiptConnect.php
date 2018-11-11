@@ -30,14 +30,14 @@ class ZeiptConnect
         $curl_post_data = array(
             'provider_gcid' => $customerId
         );
-        $response = $this->doPost($curl_post_data, '/registerprovidergcid');
-        return strpos($response, 'DONE') !== FALSE;
+        $response = json_decode($this->doPost($curl_post_data, '/registerprovidergcid'));
+        return $response->provider_gcid == $customerId;
     }
 
     public function GetReceipts($customerId, $from, $to)
     {
         $curl_post_data = array(
-            'provicer_gcid' => $customerId,
+            'provider_gcid' => $customerId,
             'all_data' => array(
                 'from_timestamp' => $from,
                 'to_timestamp' => $to,
