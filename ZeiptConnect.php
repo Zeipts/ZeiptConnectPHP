@@ -65,7 +65,7 @@ class ZeiptConnect
         $service_url = 'https://zeipt.io/zeipt/RegisterCard/';
         $curl = curl_init($service_url);
         $curl_post_data = array(
-            'GCID' => $customerId
+            'provider_gcid' => $customerId
         );
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
