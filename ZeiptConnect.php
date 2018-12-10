@@ -31,7 +31,10 @@ class ZeiptConnect
             'provider_gcid' => $customerId
         );
         $response = json_decode($this->doPost($curl_post_data, '/registerprovidergcid'));
-        return $response->provider_gcid == $customerId;
+        if ($response !== null) {
+            return $response->provider_gcid == $customerId;
+        }
+        return false;
     }
 
     public function GetReceipts($customerId, $from, $to)
