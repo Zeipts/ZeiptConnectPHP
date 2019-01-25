@@ -59,8 +59,28 @@ class ZeiptConnect
         return json_decode($this->doPost($curl_post_data, '/customer/card'));
     }
 
+    public function GetCardRegisterUrl($customerId)
+    {
+        $ch = curl_init(ZeiptConnect::$baseUrl . '/registercard');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(["provider_gcid" => $customerId]));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->BaseHeader());
+        curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+
+        return $info['redirect_url'];
+    }
+
+    /*
+     * @deprecated
+     */
     public function CreateCardRegister($customerId, $successRoute, $failRoute, $cancelRoute)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
         $this->routeCardRegisterCancelled = $cancelRoute;
         $this->routeCardRegisterSuccess = $successRoute;
         $this->routeCardRegisterFailed = $failRoute;
