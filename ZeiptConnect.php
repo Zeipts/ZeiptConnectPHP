@@ -8,6 +8,8 @@
 
 namespace Zeipt;
 
+use Carbon\Carbon;
+
 class ZeiptConnect
 {
     public $authToken; //Token issued by Zeipt.io - only cloud services now
@@ -54,7 +56,12 @@ class ZeiptConnect
     {
         $curl_post_data = array(
             'provider_gcid' => $customerId,
-            'zeipt_card_transnr' => $transferNr
+            'zeipt_card_transnr' => $transferNr,
+            'all_data' => array(
+                'from_timestamp' => Carbon::now()->subMonths(2)->toIso8601String(),
+                'to_timestamp' => Carbon::now()->toIso8601String(),
+                'all_receipts' => false
+            )
         );
         return json_decode($this->doPost($curl_post_data, '/customer/card'));
     }
